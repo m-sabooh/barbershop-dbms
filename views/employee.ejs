@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>employee</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <style>
+        h2{
+            color: black;
+        }
+        .card {
+            margin-top: 40px;
+        }
+        .homebtn {
+            margin-top: 40px;
+            margin-bottom: 30px;
+        }
+        h3 button {
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header" id="appointmentsHeading">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#appointmentsCollapse" aria-expanded="true" aria-controls="appointmentsCollapse">
+                    <h2>Appointments</h2>
+                </button>
+            </h2>
+        </div>
+        <div id="appointmentsCollapse" class="collapse show" aria-labelledby="appointmentsHeading">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Service Name</th>
+                        <th>Customer Name</th>
+                        <th>Phone</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% appointments.forEach(function(appointment) { %>
+                        <tr>
+                            <td><%= appointment.app_id %></td>
+                            <td><%= appointment.app_date.toDateString() %></td>
+                            <td><%= appointment.app_time %></td>
+                            <td><%= appointment.ser_name %></td>
+                            <td><%= appointment.f_name %> <%= appointment.l_name %></td>
+                            <td><%= appointment.cust_phone %></td>
+                            <td><%= appointment.cust_gender %></td>
+                            <td><%= appointment.cust_age %></td>
+                            <td>
+                                <!-- Delete button -->
+                                <form action="/delete-appointment" method="POST">
+                                    <input type="hidden" name="app_id" value="<%= appointment.app_id %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="customerHeading">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#customerCollapse" aria-expanded="true" aria-controls="customerCollapse">
+                    <h2>Customers</h2>
+                </button>
+            </h2>
+        </div>
+        <div id="customerCollapse" class="collapse show" aria-labelledby="customerHeading">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% customers.forEach(function(customer) { %>
+                        <tr>
+                            <td><%= customer.cust_id %></td>
+                            <td><%= customer.f_name %></td>
+                            <td><%= customer.l_name %></td>
+                            <td><%= customer.cust_phone %></td>
+                            <td><%= customer.cust_gender %></td>
+                            <td><%= customer.cust_age %></td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="employeeHeading">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#employeeCollapse" aria-expanded="true" aria-controls="employeeCollapse">
+                    <h2>Employees</h2>
+                </button>
+            </h2>
+        </div>
+        <div id="employeeCollapse" class="collapse show" aria-labelledby="employeeHeading">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                        <th>Role</th>
+                        <th>Age</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% employees.forEach(function(employee) { %>
+                        <tr>
+                            <td><%= employee.emp_id %></td>
+                            <td><%= employee.emp_f_name %></td>
+                            <td><%= employee.emp_l_name %></td>
+                            <td><%= employee.emp_phone %></td>
+                            <td><%= employee.emp_gender %></td>
+                            <td><%= employee.emp_salary %></td>
+                            <td><%= employee.emp_role %></td>
+                            <td><%= employee.emp_age %></td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- HTML code in the employee.ejs file -->
+    <div class="card">
+        <div class="card-header" id="serviceHeading">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#serviceCollapse" aria-expanded="true" aria-controls="serviceCollapse">
+                    <h2>Services</h2>
+                </button>
+            </h2>
+        </div>
+        <div id="serviceCollapse" class="collapse show" aria-labelledby="serviceHeading">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Service Name</th>
+                        <th>Service Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% services.forEach(function(service) { %>
+                        <tr>
+                            <td><%= service.ser_id %></td>
+                            <td><%= service.ser_name %></td>
+                            <td><%= service.ser_price %></td>
+                        </tr>
+                    <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h3>Find Revenue for a Specific Date</h3>
+        <form action="/revenue" method="POST">
+            <div class="form-group">
+                <label for="datePicker">Select a Date:</label>
+                <input type="date" id="datePicker" name="selectedDate" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Find Revenue</button>
+        </form>
+    </div>
+
+    <!-- Add the following code after the revenue section -->
+    <div class="container mt-5">
+        <h3>Find Number of Appointments for a Specific Date</h3>
+        <form action="/appointments" method="POST">
+            <div class="form-group">
+                <label for="datePicker">Select a Date:</label>
+                <input type="date" id="datePicker" name="selectedDate" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Find Appointments</button>
+        </form>
+    </div>
+
+
+    <div class="container mt-5">
+        <h3>The most wanted service by the customers is <button class="btn btn-lg btn-outline-success"><%=mostser%></button></h3>
+    </div>
+
+    <div class="container mt-5">
+        <h3>The youngest customer served is <button class="btn btn-lg btn-outline-success"><%=youngest%></button></h3>
+    </div>
+
+    <div class="container mt-5">
+        <h3>The oldest customer served is <button class="btn btn-lg btn-outline-success"><%=oldest%></button></h3>
+    </div>
+
+    <div class="container mt-5">
+        <h3>The most gender is <button class="btn btn-lg btn-outline-success"><%=mostgender%></button></h3>
+    </div>
+
+
+
+
+
+
+
+    <div class="text-center">
+        <a href="/" class="btn btn-lg btn-primary homebtn">Go Home</a>
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+</body>
+</html>
